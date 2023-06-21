@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+
 import './index.css';
 import App from './App';
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
-import Home from "./pages/Home";
-import Menu from "./pages/Menu";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
+import { About, Contact, Home, Login, Menu, NewProduct } from './pages'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -15,6 +13,8 @@ const router = createBrowserRouter(
             <Route path="menu" element={<Menu />} />
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="login" element={<Login />} />
+            <Route path="newproduct" element={<NewProduct />} />
         </Route>
     )
 )
