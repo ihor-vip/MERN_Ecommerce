@@ -16,7 +16,7 @@ const Header = () => {
                 </Link>
 
                 <div className='flex items-center gap-4 md:gap-7'>
-                    <nav className='flex gap-4 md:gap-6 text-base md:text-lg'>
+                    <nav className='flex gap-4 md:gap-6 text-base md:text-lg z-50'>
                         <Link to={''}>Home</Link>
                         <Link to={'menu'}>Menu</Link>
                         <Link to={'about'}>About</Link>
