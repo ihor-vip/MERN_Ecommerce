@@ -1,7 +1,9 @@
+import Header from "./component/Header";
+
 function App() {
   return (
     <div className='bg-red-500'>
-      test
+      <Header />
     </div>
   );
 }
