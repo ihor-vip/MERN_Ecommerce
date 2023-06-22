@@ -4,6 +4,7 @@ import Home from "./Home";
 import Login from "./Login";
 import Menu from "./Menu";
 import NewProduct from "./NewProduct";
+import Signup from "./Signup";
 
 export {
     About,
@@ -11,5 +12,6 @@ export {
     Home,
     Login,
     Menu,
-    NewProduct
+    NewProduct,
+    Signup
 }

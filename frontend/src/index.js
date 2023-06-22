@@ -4,7 +4,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 
 import './index.css';
 import App from './App';
-import { About, Contact, Home, Login, Menu, NewProduct } from './pages'
+import { About, Contact, Home, Login, Menu, NewProduct, Signup } from './pages'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -15,6 +15,7 @@ const router = createBrowserRouter(
             <Route path="contact" element={<Contact />} />
             <Route path="login" element={<Login />} />
             <Route path="newproduct" element={<NewProduct />} />
+            <Route path="signup" element={<Signup />} />
         </Route>
     )
 )
