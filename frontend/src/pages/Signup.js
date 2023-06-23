@@ -3,6 +3,7 @@ import {BiHide, BiShow} from "react-icons/bi";
 import {Link, useNavigate} from "react-router-dom";
 
 import loginSignUpImage from '../assets/login-animation.gif';
+import {ImageToBase64} from "../utility/ImageToBase64";
 
 const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -12,7 +13,8 @@ const Signup = () => {
         lastName: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        image: ''
     })
 
     const navigate = useNavigate();
@@ -31,6 +33,17 @@ const Signup = () => {
             return {
                 ...prev,
                 [name] : value
+            }
+        })
+    }
+
+    const handleUploadProfileImage = async(e) => {
+        const data = await ImageToBase64(e.target.files[0])
+
+        setData((prev) => {
+            return {
+                ...prev,
+                image: data
             }
         })
     }
@@ -55,8 +68,22 @@ const Signup = () => {
         <div className='p-3 md:p-4'>
             <div className='w-full max-w-sm bg-white m-auto flex flex-col p-4'>
                 {/*<h1 className='text-center text-2xl font-bold'>Sign up</h1>*/}
-                <div className='w-20 overflow-hidden rounded-full drop-shadow-md shadow-md m-auto'>
-                    <img src={loginSignUpImage} className='w-full' alt=""/>
+                <div className='w-20 h-20 overflow-hidden rounded-full drop-shadow-md shadow-md m-auto relative'>
+                    <img src={data.image ? data.image : loginSignUpImage} className='w-full h-full' alt=""/>
+
+                    <label htmlFor="profileImage">
+                        <div className='absolute bottom-0 h-1/3 bg-slate-500 bg-opacity-50 w-full text-center cursor-pointer'>
+                            <p className='text-sm p-1 text-white'>Upload</p>
+                        </div>
+
+                        <input
+                            type={'file'}
+                            id='profileImage'
+                            accept='image/*'
+                            onChange={handleUploadProfileImage}
+                            className='hidden'
+                        />
+                    </label>
                 </div>
 
                 <form className='flex flex-col w-full py-3' onSubmit={handleSubmit}>
