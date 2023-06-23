@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {BiHide, BiShow} from "react-icons/bi";
+import {Link, useNavigate} from "react-router-dom";
 
 import loginSignUpImage from '../assets/login-animation.gif';
-import {Link} from "react-router-dom";
 
 const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -15,6 +15,8 @@ const Signup = () => {
         confirmPassword: ''
     })
 
+    const navigate = useNavigate();
+
     const handleShowPassword = () => {
         setShowPassword(prev => !prev);
     }
@@ -24,7 +26,7 @@ const Signup = () => {
     }
 
     const handleOnChange = (e) => {
-        const [name, value] = e.target;
+        const {name, value} = e.target;
         setData((prev) => {
             return {
                 ...prev,
@@ -40,6 +42,7 @@ const Signup = () => {
         if (firstName && email && password && confirmPassword) {
             if (password === confirmPassword) {
                 alert('success')
+                navigate('/login')
             } else {
                 alert('password not match confirm password')
             }
@@ -158,7 +161,7 @@ const Signup = () => {
                 </form>
 
                 <p className='text-left text-sm mt-2'>
-                    Already have an account? <Link to={'login'} className='text-red-500 underline'>Login</Link>
+                    Already have an account? <Link to={'/login'} className='text-red-500 underline'>Login</Link>
                 </p>
 
             </div>
