@@ -63,7 +63,7 @@ const Signup = () => {
                 })
 
                 const dataRes = await fetchData.json()
-                alert('success')
+                alert(dataRes.message)
                 // navigate('/login')
             } else {
                 alert('password not match confirm password')

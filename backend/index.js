@@ -32,8 +32,20 @@ const userSchema = mongoose.Schema({
 const userModel = mongoose.model("user", userSchema);
 
 // sign in
-app.post('/signup', (req, res) => {
-    console.log(res.data)
-})
+app.post("/signup", async (req, res) => {
+    const { email } = req.body;
+
+    userModel.findOne({ email: email }, (err, result) => {
+        console.log(err);
+
+        if (result) {
+            res.send({ message: "User with this email already register", alert: false });
+        } else {
+            const data = userModel(req.body);
+            const save = data.save();
+            res.send({ message: "Registered successfully", alert: true });
+        }
+    });
+});
 
 app.listen(PORT, () => console.log("server is running at port : " + PORT));
