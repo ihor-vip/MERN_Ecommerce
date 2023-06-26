@@ -66,7 +66,10 @@ const Signup = () => {
                 const dataRes = await fetchData.json()
 
                 toast(dataRes.message)
-                // navigate('/login')
+
+                if(dataRes.alert) {
+                    navigate('/login')
+                }
             } else {
                 alert('password not match confirm password')
             }

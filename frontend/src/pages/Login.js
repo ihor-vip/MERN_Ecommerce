@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {BiHide, BiShow} from "react-icons/bi";
+import {toast} from 'react-hot-toast';
+import {useNavigate} from "react-router-dom";
 
 import loginSignUpImage from '../assets/login-animation.gif';
 import {Link} from "react-router-dom";
@@ -10,6 +12,8 @@ const Login = () => {
         email: '',
         password: ''
     })
+
+    const navigate = useNavigate();
 
     const handleShowPassword = () => {
         setShowPassword((prev) => !prev);
@@ -25,12 +29,26 @@ const Login = () => {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
 
         const {email, password} = data;
         if (email && password) {
-            alert('success')
+            const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/login`, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+
+            const dataRes = await fetchData.json()
+
+            toast(dataRes.message)
+
+            if(dataRes.alert) {
+                navigate('/')
+            }
         } else {
             alert('please fill all fields')
         }
@@ -96,7 +114,7 @@ const Login = () => {
                             rounded-full
                             mt-4'
                     >
-                        Sign up
+                        Log in
                     </button>
                 </form>
 

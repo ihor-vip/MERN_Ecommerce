@@ -48,4 +48,32 @@ app.post("/signup", async (req, res) => {
     });
 });
 
+// login
+app.post("/login", (req, res) => {
+    const { email } = req.body;
+
+    userModel.findOne({ email: email }, (err, result) => {
+        if (result) {
+            const dataSend = {
+                _id: result._id,
+                firstName: result.firstName,
+                lastName: result.lastName,
+                email: result.email,
+                image: result.image,
+            };
+
+            res.send({
+                message: "Login is successfully",
+                alert: true,
+                data: dataSend,
+            });
+        } else {
+            res.send({
+                message: "One of credentials are incorrect, please check again or Sign Up",
+                alert: false,
+            });
+        }
+    });
+});
+
 app.listen(PORT, () => console.log("server is running at port : " + PORT));
