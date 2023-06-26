@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {BiHide, BiShow} from "react-icons/bi";
 import {Link, useNavigate} from "react-router-dom";
+import {toast} from "react-hot-toast"
 
 import loginSignUpImage from '../assets/login-animation.gif';
 import {ImageToBase64} from "../utility/ImageToBase64";
@@ -63,7 +64,8 @@ const Signup = () => {
                 })
 
                 const dataRes = await fetchData.json()
-                alert(dataRes.message)
+
+                toast(dataRes.message)
                 // navigate('/login')
             } else {
                 alert('password not match confirm password')
