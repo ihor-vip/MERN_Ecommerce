@@ -2,17 +2,25 @@ import React, {useState} from 'react'
 import {Link} from "react-router-dom";
 import {BsCartFill} from "react-icons/bs";
 import {HiOutlineUserCircle} from "react-icons/hi";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import toast from "react-hot-toast";
 
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.png';
+import {logoutRedux} from "../redux/userSlice";
 
 const Header = () => {
     const [showMenu, setShowMenu] = useState(false);
-    const userData = useSelector(state => state.user)
+    const userData = useSelector((state) => state.user);
+    const dispatch = useDispatch();
 
     const handleShowMenu = () => {
         setShowMenu(prev => !prev)
     }
+
+    const handleLogout = () => {
+        dispatch(logoutRedux());
+        toast("Logout successfully");
+    };
 
     return (
         <header className='fixed shadow-md w-full h-16 px-2 md:px-4 z-50 bg-white'>
@@ -39,19 +47,20 @@ const Header = () => {
                     </div>
 
                     <div className='text-slate-600' onClick={handleShowMenu}>
-                        <div className='text-3xl cursor-pointer w-10 h-10 rounded-full overflow-hidden drop-shadow-md'>
+                        <div className='text-3xl cursor-pointer w-8 h-8 rounded-full overflow-hidden drop-shadow-md'>
                             {
                                 userData.image ? <img src={userData.image} className='h-full w-full'/> : <HiOutlineUserCircle/>
                             }
                         </div>
 
                         {
-                            showMenu && ( <div className='absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md flex flex-col'>
+                            showMenu && ( <div className='absolute right-2 bg-white py-2  shadow drop-shadow-md flex flex-col min-w-[120px] text-center'>
                                              <Link to={'newproduct'} className='whitespace-nowrap cursor-pointer'>New product</Link>
 
                                              {userData.image ? (
                                                  <p
                                                      className="cursor-pointer text-white px-2 bg-red-500"
+                                                     onClick={handleLogout}
                                                  >
                                                      Logout {userData.firstName}{" "}
                                                  </p>
