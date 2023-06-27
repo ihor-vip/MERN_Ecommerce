@@ -48,7 +48,21 @@ const Header = () => {
                         {
                             showMenu && ( <div className='absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md flex flex-col'>
                                              <Link to={'newproduct'} className='whitespace-nowrap cursor-pointer'>New product</Link>
-                                             <Link to={'login'} className='whitespace-nowrap cursor-pointer'>Login</Link>
+
+                                             {userData.image ? (
+                                                 <p
+                                                     className="cursor-pointer text-white px-2 bg-red-500"
+                                                 >
+                                                     Logout {userData.firstName}{" "}
+                                                 </p>
+                                             ) : (
+                                                 <Link
+                                                     to={"login"}
+                                                     className="whitespace-nowrap cursor-pointer px-2"
+                                                 >
+                                                     Login
+                                                 </Link>
+                                             )}
                                           </div>
                         )}
 
