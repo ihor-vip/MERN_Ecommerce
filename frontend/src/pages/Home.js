@@ -2,11 +2,14 @@ import React from "react";
 import {useSelector} from "react-redux";
 
 import HomeCard from "../component/HomeCard";
+import CardFeature from "../component/CardFeature";
 
 const Home = () => {
     const productData = useSelector((state) => state.product.productList);
     const homeProductCartList = productData.slice(1, 5);
+    const homeProductCartListVegetables = productData.filter((el) => el.category === "vegetable", []);
     const loadingArray = new Array(4).fill(null);
+    const loadingArrayFeature = new Array(10).fill(null);
 
     return (
         <div className='p-2 md:p-4'>
@@ -50,8 +53,28 @@ const Home = () => {
                             );
                         })
                         : loadingArray.map((el, index) => {
-                            return <HomeCard key={index+'loading'} loading={'Loading...'} />;
+                            return <HomeCard key={index + 'loading'} loading={'Loading...'} />;
                         })}
+                </div>
+            </div>
+
+            <div className=''>
+                <h2 className='font-bold text-2xl text-slate-800'>Fresh Vegetables</h2>
+                <div className=''>
+                    {
+                        homeProductCartListVegetables.map(el => {
+                            return (
+                                <CardFeature
+                                    key={el._id + 'vegetable'}
+                                    id={el._id}
+                                    name={el.name}
+                                    category={el.category}
+                                    price={el.price}
+                                    image={el.image}
+                                />
+                            )
+                        })
+                    }
                 </div>
             </div>
         </div>
