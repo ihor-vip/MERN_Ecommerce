@@ -81,6 +81,24 @@ const Header = () => {
                                         Login
                                     </Link>
                                 )}
+
+                                <nav className='text-base md:text-lg flex flex-col md:hidden'>
+                                    <Link to={''} className='px-2 py-1'>
+                                        Home
+                                    </Link>
+                                    <Link
+                                        to={'menu'}
+                                        className='px-2 py-1'
+                                    >
+                                        Menu
+                                    </Link>
+                                    <Link to={'about'} className='px-2 py-1'>
+                                        About
+                                    </Link>
+                                    <Link to={'contact'} className='px-2 py-1'>
+                                        Contact
+                                    </Link>
+                                </nav>
                             </div>
                         )}
                     </div>
